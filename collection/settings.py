@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'collection.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config("SQL_ENGINE"),
-        'NAME': BASE_DIR / config("SQL_NAME_DATABASE"),
+        'NAME': config("SQL_NAME_DATABASE"),
     }
 }
 

@@ -36,8 +36,9 @@ class UserSerializer(serializers.ModelSerializer):
                 if errors:
                     raise serializers.ValidationError(errors)
         else:
-            error_didnt_match = {'password1': 'As senhas não conferem'}
+            error_didnt_match = {'password1': 'As senhas não são iguais'}
             raise serializers.ValidationError(error_didnt_match)
+        return super(UserSerializer, self).validate(data)
 
     def create(self, validated_data):
         password = validated_data.pop('password1')

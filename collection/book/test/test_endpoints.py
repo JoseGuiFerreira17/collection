@@ -14,9 +14,9 @@ factory = APIRequestFactory()
 
 class CategoryTestViewSet(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='admin')
-        self.user.set_password('admin123')
-        self.user.is_superuser = True
+        self.user = User.objects.create_superuser(
+            username='admin', password='admin123'
+        )
         self.user.save()
 
         self.category = Category.objects.create(name='Teste')
@@ -27,6 +27,7 @@ class CategoryTestViewSet(TestCase):
             'name': 'Romance'
         }
         request = factory.post('api/v1/category/', data)
+        force_authenticate(request, user=self.user)
         view = CategoryViewSet.as_view({'post': 'create'})
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -45,8 +46,8 @@ class CategoryTestViewSet(TestCase):
         request = factory.get('api/v1/category/',)
         force_authenticate(request, user=self.user)
         view = CategoryViewSet.as_view({'get': 'retrieve'})
-        response = view(request, pk=self.user.id)
-        category = Category.objects.get(pk=self.category.id)
+        response = view(request, pk=self.category.id)
+        category = Category.objects.get(pk=self.category.pk)
         serializer = CategorySerializer(category)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -58,8 +59,8 @@ class CategoryTestViewSet(TestCase):
         request = factory.post('api/v1/category/', data)
         force_authenticate(request, user=self.user)
         view = CategoryViewSet.as_view({'post': 'update'})
-        response = view(request, pk=self.user.id)
-        category = Category.objects.get(pk=self.category.id)
+        response = view(request, pk=self.category.id)
+        category = Category.objects.get(pk=self.category.pk)
         serializer = CategorySerializer(category)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -68,15 +69,15 @@ class CategoryTestViewSet(TestCase):
         request = factory.delete('api/category/')
         force_authenticate(request, user=self.user)
         view = CategoryViewSet.as_view({"delete": "destroy"})
-        response = view(request, pk=self.user.id)
+        response = view(request, pk=self.category.id)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 
 class BookTestViewSet(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='admin')
-        self.user.set_password('admin123')
-        self.user.is_superuser = True
+        self.user = User.objects.create_superuser(
+            username='admin', password='admin123'
+        )
         self.user.save()
 
         self.category = Category.objects.create(name='Teste')
@@ -91,9 +92,10 @@ class BookTestViewSet(TestCase):
     def test_create(self):
         data = {
             'title': 'livro', 'author': 'guilherme', 'number_of_pages': 45,
-            'category': self.category, 'user': self.user
+            'category': self.category.pk, 'user': self.user.pk
         }
         request = factory.post('api/v1/book/', data)
+        force_authenticate(request, user=self.user)
         view = BookViewSet.as_view({'post': 'create'})
         response = view(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -112,21 +114,21 @@ class BookTestViewSet(TestCase):
         request = factory.get('api/v1/book/',)
         force_authenticate(request, user=self.user)
         view = BookViewSet.as_view({'get': 'retrieve'})
-        response = view(request, pk=self.user.id)
-        user = Book.objects.get(pk=self.user.id)
-        serializer = BookSerializer(user)
+        response = view(request, pk=self.book.id)
+        book = Book.objects.get(pk=self.book.id)
+        serializer = BookSerializer(book)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
     def test_update(self):
         data = {
             'title': 'livro2', 'author': 'guilherme', 'number_of_pages': 45,
-            'category': self.category, 'user': self.user
+            'category': self.category.pk, 'user': self.user.pk
         }
         request = factory.post('api/v1/book/', data)
         force_authenticate(request, user=self.user)
         view = BookViewSet.as_view({'post': 'update'})
-        response = view(request, pk=self.user.id)
+        response = view(request, pk=self.book.id)
         book = Book.objects.get(pk=self.book.id)
         serializer = BookSerializer(book)
         self.assertEqual(response.data, serializer.data)
@@ -136,5 +138,5 @@ class BookTestViewSet(TestCase):
         request = factory.delete('api/book/')
         force_authenticate(request, user=self.user)
         view = BookViewSet.as_view({"delete": "destroy"})
-        response = view(request, pk=self.user.id)
+        response = view(request, pk=self.book.id)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

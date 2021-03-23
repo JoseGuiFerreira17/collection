@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from collection.user.models import User
 from collection.user.permissions import IsAuthenticatedOrWriteOnly
-from collection.user.serializers import (UserSerializer, UpdateUserSerializer)
+from collection.user.serializers import UserSerializer, UpdateUserSerializer
 
 
 class UserViewSet(ModelViewSet):
