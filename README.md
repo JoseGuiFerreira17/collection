@@ -36,12 +36,12 @@ python manage.py runserver
 6. Guarde os valores gerados em 'Client id' e em 'Client secret', eles serão usados na autenticação da API, e a forma de usar deve ser consultada no arquivo DOC.md
 
 # Documentação:
-##Verifique os seguintes links:
+## Verifique os seguintes links:
 <hr>
-##Sawagger
+## Sawagger
 Consulte os endpoints em: http://127.0.0.1:8000/swagger/
-##Redoc
+## Redoc
 Consulte os endpoints em: http://127.0.0.1:8000/redoc/
-##Insomia
-Importe o arquivo "collectio_api_insomnia"
+## Insomia
+Importe o arquivo "collection_api_insomnia"
 
