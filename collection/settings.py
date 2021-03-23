@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # Local Apps
     'collection.user',
+    'collection.book',
 
 ]
 
