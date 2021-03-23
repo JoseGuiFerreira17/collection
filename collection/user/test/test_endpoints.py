@@ -13,15 +13,15 @@ factory = APIRequestFactory()
 
 class UserTestViewSet(TestCase):
     def setUp(self):
-        self.user = User.objects.create(username='admin')
-        self.user.set_password('admin123')
-        self.user.is_superuser = True
+        self.user = User.objects.create_superuser(
+            username='admin', password='admin123'
+        )
         self.user.save()
 
     def test_create(self):
         data = {
-            'username': 'ademir', 'email': 'admin@admin.com',
-            'password1': 'admin4312', 'password2': 'admin4312'
+            'username': 'ademir', 'password1': 'admin4312',
+            'password2': 'admin4312'
         }
         request = factory.post('api/v1/user/', data)
         view = UserViewSet.as_view({'post': 'create'})
@@ -37,7 +37,7 @@ class UserTestViewSet(TestCase):
         view = UserViewSet.as_view({'post': 'create'})
         response = view(request)
         self.assertEqual(
-            dict(response.data)['password1'][0], 'As senhas não conferem'
+            dict(response.data)['password1'][0], 'As senhas não são iguais'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 

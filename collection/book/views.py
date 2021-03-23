@@ -13,7 +13,6 @@ class BookViewSet(ModelViewSet):
     filterset_fields = (
         'title', 'author', 'number_of_pages', 'category', 'user'
     )
-    ordering = ('-created_at')
 
     def get_queryset(self, *args, **kwargs):
         user = User.objects.get(id=self.request.user.id)
@@ -26,5 +25,5 @@ class CategoryViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    filterset_fields = ('name',)
+    filterset_fields = ('name')
     ordering = ('-created_at')  

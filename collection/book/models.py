@@ -15,6 +15,7 @@ class Category(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = 'categoria'
         verbose_name_plural = 'categorias'
 
@@ -43,5 +44,6 @@ class Book(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['-created_at']
         verbose_name = 'livro'
         verbose_name_plural = 'livros'

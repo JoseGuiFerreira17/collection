@@ -9,7 +9,7 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         ordering = ['created_at']
         fields = [
-            'id', 'title', 'author', 'number_of_pages', 'category', 'user'
+            'id', 'title', 'author', 'number_of_pages', 'category', 'user',
             'created_at', 'modified_at'
         ]
         extra_kwargs = {
