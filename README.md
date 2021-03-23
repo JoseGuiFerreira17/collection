@@ -6,7 +6,7 @@ API para gerenciamento de livros de acervo pessoal
 
 A documentação para uso desta API encontra-se no arquivo DOC.md
 
-## Como desenvolver?
+## Como usar a aplicação?
 
 1. Clone do  repositório
 2. Entre na pasta do mesmo
@@ -20,7 +20,7 @@ A documentação para uso desta API encontra-se no arquivo DOC.md
 10. Execute a aplicação
 
 ```console
-git clone https://github.com/gguerran/ecommerce.git
+git clone https://github.com/JoseGuiFerreira17/collection.git
 cd collection
 python3 -m venv .env
 source .env/bin/activate
