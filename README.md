@@ -2,10 +2,6 @@
 
 API para gerenciamento de livros de acervo pessoal
 
-## Documentação
-
-A documentação para uso desta API encontra-se no arquivo DOC.md
-
 ## Como usar a aplicação?
 
 1. Clone do  repositório
