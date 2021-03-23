@@ -27,3 +27,10 @@ python manage.py test
 python manage.py createsuperuser
 python manage.py runserver
 ```
+## Após isso execute os seguintes passos:
+1. Abra a sua url_base/admin/ (ex.: http://127.0.0.1:8000/admin)
+2. Acesse com os dados do super usuário que você criou
+3. Em 'DJANGO OAUTH TOOLKIT', em 'Applications' clique em 'Adicionar'
+4. Ná pagina de adição de 'Applications', em 'Client type' selecione a opção 'Confidential'
+5. Em 'Authorization grant type' selecione a opção 'Resource owner password-based'
+6. Guarde os valores gerados em 'Client id' e em 'Client secret', eles serão usados na autenticação da API, e a forma de usar deve ser consultada no arquivo DOC.md
