@@ -37,6 +37,7 @@ urlpatterns = [
         name='schema-redoc'
     ),
     path('api/user/', include('collection.user.urls'), name='user'),
+    path('api/book/', include('collection.book.urls'), name='book'),
     path(
         'api/auth/',
         include('oauth2_provider.urls', namespace='oauth2_provider')
